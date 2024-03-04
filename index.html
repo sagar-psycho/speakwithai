@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <textarea id="textarea" name="" id="" cols="30" rows="10" placeholder="Enter the text. I will speak"></textarea><br>
+    <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea><br>
+    <p id="speakingMessage" class="speaking">Speaking...</p> <!-- Speaking message -->
+    <p id="errorMessage" class="message">Please enter the text.</p> <!-- Error message -->
     <button id="speakbtn" onclick="speak()">Speak</button>
 </body>
 <script src="source.js">
