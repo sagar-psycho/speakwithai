@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="loca">
+    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Hi User and im happy to help you</h1>
     <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea><br>
-    <p id="speakingMessage" class="speaking">Speaking...</p> <!-- Speaking message -->
-    <p id="errorMessage" class="message">Please enter the text.</p> <!-- Error message -->
-    <button id="speakbtn" onclick="speak()">Speak</button>
-</body>
+    <p id="speakingMessage" class="speaking">Speaking 🥳...</p> <!-- Message for speaking -->
+    <p id="enterTextMessage" class="message">Please enter the text.😏</p> <!-- Message for empty input -->
+    <button id="speakbtn" class="button" onclick="speak()">Speak</button>
+</div>
+
+<div class="history">
+    <h3>History:</h3><br>
+    <ul id="historyList"></ul>
+    <button id="clearHistoryBtn" onclick="clearHistory()">Clear History</button>
+</div>
 <script src="source.js">
 </script>
+</body>
 </html>
