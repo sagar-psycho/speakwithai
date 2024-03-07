@@ -2,11 +2,17 @@
     margin: 0;
     padding: 0;
 }
-.loca{
+.heading{
+    text-align: center;
+}
+.loca, .speack{
     margin-left: 2vh;
     margin-right: 2vh;
     margin-top: 2vh;
     text-align: center;
+}
+.speack{
+    margin-top: 5%;
 }
 @keyframes shake {
     0% { transform: translateX(0); }
@@ -53,8 +59,11 @@ textarea{
     border-radius: 10px;
     border: 3px double red;
     height: 35vh;
-    width: 90%;
+    width: 80%;
     padding: 5px;
+}
+textarea:active{
+    border: none;
 }
 @keyframes shake {
     0% { transform: translateX(0); }
@@ -70,13 +79,21 @@ textarea{
 .speaking {
     color: green;
     animation: shake 0.5s ease-in-out 1s forwards;
-    display: none; /* Initially hide the message */
+    display: none; /* In
+    itially hide the message */
+}
+
+.both{
+    display: flex;
+    gap: 80%;
 }
 .history{
     margin-left: 5%;
+    margin-top: 9%
 }
 .history ul{
     margin-left: 2%;
+    margin-bottom: 15px;
     list-style: none;
 }
 #clearHistoryBtn{
@@ -86,9 +103,8 @@ textarea{
     background-color: rgb(255, 51, 0);
     border: none;
     margin-top: -10px;
-    float: right;
     padding: 10px;
-    font-size: 16px;
+    font-size: 19px;
     margin-right: 2%;
 }
 #clearHistoryBtn:hover{
@@ -100,4 +116,35 @@ textarea{
 }
 .log{
     display: flex;
+}
+#textcopy, #textco{
+    border-radius: 5px;
+    width: 150px;
+    color: white;
+    background-color: rgb(255, 0, 183);
+    border: none;
+    padding: 10px;
+    font-size: 19px;
+}
+#textcopy, #textco:hover{
+    background-color: green;
+    cursor: copy;
+}
+#start-btn{
+    border-radius: 5px;
+    width: 100px;
+    color: white;
+    background-color: rgb(17, 255, 0);
+    border: none;
+    padding: 10px;
+    font-size: 19px;
+}
+#stop-btn{
+    border-radius: 5px;
+    width: 100px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border: none;
+    padding: 10px;
+    font-size: 19px;
 }
