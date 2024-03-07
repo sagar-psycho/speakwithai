@@ -1,4 +1,4 @@
-let history = []; // Array to store spoken text history
+let history = JSON.parse(localStorage.getItem('history')) || []; // Retrieve history from local storage
 
 function speak() {
     let text = document.getElementById('textarea').value.trim(); // Trim whitespace
@@ -47,10 +47,11 @@ function speakText(text) {
 function updateHistory() {
     let historyList = document.getElementById('historyList');
     historyList.innerHTML = ''; // Clear previous history
-
-    history.forEach(function(item) {
+    
+    // Add count to each item in history
+    history.forEach(function(item, index) {
         let li = document.createElement('li');
-        li.textContent = item;
+        li.textContent = `${index + 1}. ${item}`;
         historyList.appendChild(li);
     });
 }
@@ -69,4 +70,73 @@ window.onload = function() {
             speak(); // Speak the entered text
         }
     });
+};
+window.onload = function() {
+    document.getElementById('textarea').value = ''; // Clear the input field
+    updateHistory();
+};
+//copy text
+function copytext(){
+    var textarea = document.getElementById("textarea");
+    var textcopy = document.getElementById("textcopy");
+    
+    if (textarea.value.trim() === "") {
+        alert("Please enter text before copying.");
+    } else {
+        textarea.select();
+        document.execCommand("copy");
+        textcopy.innerHTML = "Copied";
+
+        setTimeout(function() {
+            textcopy.innerHTML = "Copy text";
+        }, 1000); // Change back to "Copy text" after 5 seconds (5000 milliseconds)
+    }
+}
+function copytex(){
+    var output = document.getElementById("output");
+    var textco = document.getElementById("textco");
+    
+    if (output.value.trim() === "") {
+        alert("Please enter text before copying.");
+    } else {
+        output.select();
+        document.execCommand("copy");
+        textco.innerHTML = "Copied";
+
+        setTimeout(function() {
+            textco.innerHTML = "Copy text";
+        }, 1000); // Change back to "Copy text" after 5 seconds (5000 milliseconds)
+    }
+}
+//Speach
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.lang = 'en-US';
+recognition.interimResults = true;
+recognition.continuous = true;
+
+const startBtn = document.getElementById("start-btn");
+const stopBtn = document.getElementById("stop-btn");
+const statusDiv = document.getElementById("status");
+
+startBtn.addEventListener("click", () => {
+    recognition.start();
+    statusDiv.textContent = "Listening... Start speaking";
+});
+
+stopBtn.addEventListener("click", () => {
+    recognition.stop();
+    statusDiv.textContent = "Recognition stopped.";
+});
+
+recognition.onresult = event => {
+    const transcript = Array.from(event.results)
+        .map(result => result[0].transcript)
+        .join("");
+    document.getElementById("output").value = transcript;
+};
+
+recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    statusDiv.textContent = 'Error: ' + event.error;
 };
