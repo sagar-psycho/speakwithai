@@ -7,19 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 class="heading">Hi User and im happy to help you</h1>
 <div class="loca">
-    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Hi User and im happy to help you</h1>
-    <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea><br>
+    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Text to Speach Converter</h1>
+    <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea>
+    <button id="textcopy" onclick="copytext()">Copy&nbsp;text</button> <br>
     <p id="speakingMessage" class="speaking">Speaking 🥳...</p> <!-- Message for speaking -->
     <p id="enterTextMessage" class="message">Please enter the text.😏</p> <!-- Message for empty input -->
     <button id="speakbtn" class="button" onclick="speak()">Speak</button>
 </div>
-
 <div class="history">
-    <h3>History:</h3><br>
-    <ul id="historyList"></ul>
-    <button id="clearHistoryBtn" onclick="clearHistory()">Clear History</button>
+    <div class="both">
+        <h3>History:</h3>
+        <button id="clearHistoryBtn" onclick="clearHistory()">Clear History</button>
+    </div>
+        <ul id="historyList"></ul>
 </div>
+<div class="speack">
+    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Speech to text Converter</h1>
+    <textarea id="output"></textarea>
+    <button id="textco" onclick="copytex()">Copy&nbsp;text</button> <br>
+    <br>
+    <div id="status"></div>
+    <button id="start-btn">Start</button>
+    <button id="stop-btn">Stop</button>
+</div>
+<br><br><br>
 <script src="source.js">
 </script>
 </body>
