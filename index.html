@@ -3,37 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sagar Ai</title>
+    <link rel="icon" href="Sagar logo.jpg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="heading">Hi User and im happy to help you</h1>
-<div class="loca">
-    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Text to Speach Converter</h1>
-    <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea>
-    <button id="textcopy" onclick="copytext()">Copy&nbsp;text</button> <br>
-    <p id="speakingMessage" class="speaking">Speaking 🥳...</p> <!-- Message for speaking -->
-    <p id="enterTextMessage" class="message">Please enter the text.😏</p> <!-- Message for empty input -->
-    <button id="speakbtn" class="button" onclick="speak()">Speak</button>
-</div>
-<div class="history">
-    <div class="both">
-        <h3>History:</h3>
-        <button id="clearHistoryBtn" onclick="clearHistory()">Clear History</button>
+    <marquee behavior="" direction=""><h1 class="heading">Hi User and I'm here happy to help you</h1></marquee>
+    <div class="sp">
+        <div class="loca">
+            <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Text to Speech Converter</h1>
+            <textarea id="textarea" placeholder="Enter the text. I will speak"></textarea>
+            <p id="typing"></p>
+            <button id="textcopy" onclick="copytext()">Copy&nbsp;text</button> <br>
+            <p id="speakingMessage" class="speaking">Speaking 🥳...</p> <!-- Message for speaking -->
+            <p id="enterTextMessage" class="message">Please enter the text.😏</p> <!-- Message for empty input -->
+            <button id="speakbtn" class="button" onclick="speak()">Speak</button>
+        </div>
+        <div class="history">
+            <div class="both">
+                <h3>History:</h3>
+                <button id="clearHistoryBtn" onclick="clearHistory()">Clear History</button>
+            </div>
+            <ul id="historyList"></ul>
+        </div>
     </div>
-        <ul id="historyList"></ul>
-</div>
-<div class="speack">
-    <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Speech to text Converter</h1>
-    <textarea id="output"></textarea>
-    <button id="textco" onclick="copytex()">Copy&nbsp;text</button> <br>
-    <br>
-    <div id="status"></div>
-    <button id="start-btn">Start</button>
-    <button id="stop-btn">Stop</button>
-</div>
-<br><br><br>
-<script src="source.js">
-</script>
+    <div class="speack">
+        <h1 style="float: left; margin-left: 6%; margin-bottom: 1%;">Speech to Text Converter</h1>
+        <div>
+            <textarea id="output"></textarea>
+            <button id="textco" onclick="copytex()">Copy&nbsp;text</button> <br>
+        </div>
+        <br>
+        <div id="status"></div>
+        <div id="statu"></div>
+        <button id="start-btn">Start</button>
+        <button id="stop-btn">Stop</button><br><br>
+        <div class="his">
+            <h2>History:</h2>
+            <ul id="history-list"></ul>
+            <button id="clear-history-btn">Clear&nbsp;History</button>
+        </div>
+    </div>
+<button id="bottomtotpo">
+    ||Top
+</button>
+    <script src="source.js">
+        // Your JavaScript code goes here
+    </script>
 </body>
 </html>
