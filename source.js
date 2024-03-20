@@ -13,7 +13,7 @@ function speak() {
         // Hide the message after 3 seconds
         setTimeout(function() {
             enterTextMessage.style.display = 'none';
-        }, 1500);
+        }, 3000);
         return;
     }
 
@@ -59,23 +59,15 @@ function updateHistory() {
 function clearHistory() {
     history = []; // Clear history array
     updateHistory(); // Update history list
+    localStorage.removeItem('history'); // Remove history from localStorage
 }
 
 window.onload = function() {
     document.getElementById('textarea').value = ''; // Clear the input field
-
-    // Listen for the Enter key press event on the textarea
-    document.getElementById('textarea').addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            speak(); // Speak the entered text
-        }
-    });
-};
-window.onload = function() {
-    document.getElementById('textarea').value = ''; // Clear the input field
     updateHistory();
 };
-//copy text
+
+// Copy text functions
 function copytext(){
     var textarea = document.getElementById("textarea");
     var textcopy = document.getElementById("textcopy");
@@ -89,9 +81,10 @@ function copytext(){
 
         setTimeout(function() {
             textcopy.innerHTML = "Copy text";
-        }, 1000); // Change back to "Copy text" after 5 seconds (5000 milliseconds)
+        }, 1000); // Change back to "Copy text" after 1 second
     }
 }
+
 function copytex(){
     var output = document.getElementById("output");
     var textco = document.getElementById("textco");
@@ -105,10 +98,11 @@ function copytex(){
 
         setTimeout(function() {
             textco.innerHTML = "Copy text";
-        }, 1000); // Change back to "Copy text" after 5 seconds (5000 milliseconds)
+        }, 1000); // Change back to "Copy text" after 1 second
     }
 }
-//Speach
+
+// Speech recognition
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.lang = 'en-US';
@@ -118,25 +112,62 @@ recognition.continuous = true;
 const startBtn = document.getElementById("start-btn");
 const stopBtn = document.getElementById("stop-btn");
 const statusDiv = document.getElementById("status");
+const statuDiv = document.getElementById("statu");
+const outputTextarea = document.getElementById("output");
+const clearHistoryBtn = document.getElementById("clear-history-btn");
+
+let currentTranscript = "";
+let speakingMessageTimeout;
+
+function speak(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    synth.speak(utterance);
+}
+
+function displayStatusMessage(message, duration) {
+    // Clear any previous timeout for speaking message
+    clearTimeout(speakingMessageTimeout);
+
+    // Clear the statusDiv content
+    statusDiv.textContent = "";
+
+    // Display the new message
+    statusDiv.textContent = message;
+    speak(message);
+
+    // Set timeout to clear the message after duration
+    speakingMessageTimeout = setTimeout(() => {
+        statusDiv.textContent = "";
+    }, duration);
+}
 
 startBtn.addEventListener("click", () => {
-    recognition.start();
-    statusDiv.textContent = "Listening... Start speaking";
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+            displayStatusMessage("Microphone access granted. Listening... Start speaking.", 5000);
+            recognition.start();
+        })
+        .catch(function(err) {
+            console.error('Error accessing microphone:', err);
+            statu.textContent = "Error: Microphone access denied.";
+        });
 });
 
 stopBtn.addEventListener("click", () => {
     recognition.stop();
-    statusDiv.textContent = "Recognition stopped.";
+    clearTimeout(speakingMessageTimeout);
+    displayStatusMessage("Recording stopped.", 2000);
+    if (currentTranscript.trim() !== "") {
+        addToHistory(currentTranscript);
+    }
 });
 
 recognition.onresult = event => {
-    const transcript = Array.from(event.results)
+    currentTranscript = Array.from(event.results)
         .map(result => result[0].transcript)
         .join("");
-    document.getElementById("output").value = transcript;
+    outputTextarea.value = currentTranscript;
 };
 
-recognition.onerror = (event) => {
-    console.error('Speech recognition error:', event.error);
-    statusDiv.textContent = 'Error: ' + event.error;
-};
+// top Button
